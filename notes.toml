@@ -1,15 +1,15 @@
-[a]
-  Val = "nil"
-  Exced = false
-
 [go]
-  Val = "go"
+  Val = " 'go' 'help'"
   Exced = true
 
 [gv]
-  Val = "go version"
+  Val = " 'go' 'version'"
   Exced = true
 
-[toukii]
-  Val = "echo \"@ezbuy toukii\""
+[hello]
+  Val = " 'echo' 'Hello World! '"
+  Exced = true
+
+[passwd]
+  Val = " '12345678'"
   Exced = false

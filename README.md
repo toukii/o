@@ -1,22 +1,38 @@
+## usage
+
+```
+no go -e go help
+no passwd 12345678
+```
 
 ```toml
-[a]
-  Val = "nil"
-  Exced = false
-
 [go]
-  Val = "go"
+  Val = " 'go' 'help'"
   Exced = true
 
 [gv]
-  Val = "go version"
+  Val = " 'go' 'version'"
   Exced = true
 
-[toukii]
-  Val = "echo \"@ezbuy toukii\""
+[hello]
+  Val = " 'echo' 'Hello World! '"
+  Exced = true
+
+[passwd]
+  Val = " '12345678'"
   Exced = false
 ```
 
+
+
 ```
-no toukii
+➜  no git:(master) ✗ no hello
+ 'echo' 'Hello World! '
+Hello World!
+
+➜  no git:(master) ✗ no -l
+*********** keys **********
+gv
+hello
+go
 ```

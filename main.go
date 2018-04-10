@@ -110,7 +110,7 @@ func GetNote(key string) {
 	}
 	cm := closestmatch.New(keys, []int{1})
 	k2 := cm.Closest(key)
-	fmt.Printf("%s ~~> %s\n", key, k2)
+	fmt.Printf("%s ≈≈> %s\n", key, k2)
 	note, ex := dic[key]
 	if !ex {
 		note, ex = dic[k2]

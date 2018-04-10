@@ -1,9 +1,5 @@
-[-e]
-  Val = "'go' 'version'"
-  Exced = true
-
 [go]
-  Val = " 'go' 'help'"
+  Val = "'go' 'help'"
   Exced = true
 
 [gov]
@@ -11,13 +7,13 @@
   Exced = true
 
 [gv]
-  Val = " 'go' 'version'"
+  Val = "'go' 'version'"
   Exced = true
 
 [hello]
-  Val = " 'echo' 'Hello World! '"
+  Val = "'echo' 'Hello World! '"
   Exced = true
 
 [passwd]
-  Val = " '12345678'"
+  Val = "'12345678'"
   Exced = false

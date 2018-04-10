@@ -8,6 +8,7 @@ import (
 	"github.com/BurntSushi/toml"
 	"github.com/everfore/exc"
 	"github.com/toukii/bytes"
+	"github.com/toukii/closestmatch"
 	"github.com/toukii/goutils"
 )
 
@@ -103,7 +104,17 @@ func ListKeys() {
 }
 
 func GetNote(key string) {
+	keys := make([]string, 0, len(dic))
+	for k, _ := range dic {
+		keys = append(keys, k)
+	}
+	cm := closestmatch.New(keys, []int{1})
+	k2 := cm.Closest(key)
+	fmt.Printf("%s ~~> %s\n", key, k2)
 	note, ex := dic[key]
+	if !ex {
+		note, ex = dic[k2]
+	}
 	if !ex {
 		fmt.Println("note nil")
 		return

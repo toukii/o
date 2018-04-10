@@ -49,6 +49,10 @@ func main() {
 	case 1:
 		fmt.Println("nil args")
 	case 2:
+		if args[1] == "-l" {
+			ListKeys()
+			return
+		}
 		GetNote(args[1])
 	default:
 		SetNote(args[1:])
@@ -80,6 +84,13 @@ func SetNote(args []string) {
 		Exced: exced,
 	}
 	refresh()
+}
+
+func ListKeys() {
+	fmt.Println("*********** keys **********")
+	for k, _ := range dic {
+		fmt.Println(k)
+	}
 }
 
 func GetNote(key string) {

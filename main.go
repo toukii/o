@@ -18,9 +18,6 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// refresh()
-
 }
 
 type Note struct {
@@ -88,11 +85,4 @@ func GetNote(key string) {
 		return
 	}
 	exc.Bash(note.Val).Debug(true).Execute()
-
-	// exc.Bash(fmt.Sprintf("echo '%s'| pbcopy", note.Val)).Debug(false).Execute()
-	// bs, err := exc.Bash("echo `pbpaste`").Debug(false).DoNoTime()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("%s", bs)
 }

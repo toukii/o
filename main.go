@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 
 	"github.com/BurntSushi/toml"
 	"github.com/everfore/exc"
@@ -61,14 +60,23 @@ func SetNote(args []string) {
 	if args[1] == "-e" {
 		exced = true
 	}
-	val := ""
+	var vals []string
+	w := bytes.NewWriter(make([]byte, 0, 1024))
 	if exced {
-		val = strings.Join(args[2:], " ")
+		vals = args[2:]
 	} else {
-		val = strings.Join(args[1:], " ")
+		vals = args[1:]
 	}
+	for _, it := range vals {
+		if it[0] != "-"[0] {
+			w.Write(goutils.ToByte(fmt.Sprintf(" '%s'", it)))
+		} else {
+			w.Write(goutils.ToByte(fmt.Sprintf(" %s", it)))
+		}
+	}
+
 	dic[args[0]] = &Note{
-		Val:   val,
+		Val:   goutils.ToString(w.Bytes()),
 		Exced: exced,
 	}
 	refresh()
@@ -85,4 +93,11 @@ func GetNote(key string) {
 		return
 	}
 	exc.Bash(note.Val).Debug(true).Execute()
+
+	// exc.Bash(fmt.Sprintf("echo '%s'| pbcopy", note.Val)).Debug(false).Execute()
+	// bs, err := exc.Bash("echo `pbpaste`").Debug(false).DoNoTime()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("%s", bs)
 }

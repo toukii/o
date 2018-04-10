@@ -1,8 +1,8 @@
 ## usage
 
 ```
-no go -e go help
-no passwd 12345678
+o go -e go help
+o passwd 12345678
 ```
 
 ```toml
@@ -26,11 +26,11 @@ no passwd 12345678
 
 
 ```
-➜  no git:(master) ✗ no hello
+➜  o git:(master) ✗ o hello
  'echo' 'Hello World! '
 Hello World!
 
-➜  no git:(master) ✗ no -l
+➜  o git:(master) ✗ o -l
 *********** keys **********
 gv
 hello

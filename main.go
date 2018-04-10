@@ -24,6 +24,10 @@ type Note struct {
 	Exced bool
 }
 
+func (n *Note) String() string {
+	return fmt.Sprintf("%s [exced: %+v]", n.Val, n.Exced)
+}
+
 var (
 	dic map[string]*Note
 
@@ -71,11 +75,15 @@ func SetNote(args []string) {
 	} else {
 		vals = args[1:]
 	}
-	for _, it := range vals {
+	space := ""
+	for i, it := range vals {
+		if i > 0 {
+			space = " "
+		}
 		if it[0] != "-"[0] {
-			w.Write(goutils.ToByte(fmt.Sprintf(" '%s'", it)))
+			w.Write(goutils.ToByte(fmt.Sprintf("%s'%s'", space, it)))
 		} else {
-			w.Write(goutils.ToByte(fmt.Sprintf(" %s", it)))
+			w.Write(goutils.ToByte(fmt.Sprintf("%s%s", space, it)))
 		}
 	}
 
@@ -83,6 +91,7 @@ func SetNote(args []string) {
 		Val:   goutils.ToString(w.Bytes()),
 		Exced: exced,
 	}
+	fmt.Printf("[%s] ==> %s\n", args[0], dic[args[0]])
 	refresh()
 }
 

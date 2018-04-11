@@ -14,7 +14,12 @@ import (
 
 func init() {
 	dic = make(map[string]*Note)
-	err := toml.Unmarshal(goutils.ReadFile(notesFile), &dic)
+	bs := goutils.ReadFile(notesFile)
+	if len(bs) <= 0 {
+		notesFile = os.Getenv("HOME") + "/.notes.toml"
+		bs = goutils.ReadFile(notesFile)
+	}
+	err := toml.Unmarshal(bs, &dic)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -32,7 +37,7 @@ func (n *Note) String() string {
 var (
 	dic map[string]*Note
 
-	notesFile = "notes.toml"
+	notesFile = ".notes.toml"
 )
 
 func refresh() {

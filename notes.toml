@@ -1,11 +1,11 @@
-[go]
-  Val = "'go' 'help'"
-  Exced = true
-
 [gov]
   Val = "'go' 'version'"
   Exced = true
 
 [hello]
-  Val = "'echo' -n 'Hello World! '"
+  Val = "'hello' 'echo' -n 'Hello' 'World!'"
   Exced = true
+
+[passwd]
+  Val = "'12345678'"
+  Exced = false

@@ -3,26 +3,27 @@
 
 ### and note
 
+__-e ：是否可执行__
+
 ```bash
-o go -e go help
+o hello -e hello echo -n Hello World! 
+o gov -e go version
 o passwd 12345678
 ```
 
-```toml
-[go]
-  Val = " 'go' 'help'"
-  Exced = true
+生成的配置文件
 
-[gv]
-  Val = " 'go' 'version'"
+```toml
+[gov]
+  Val = "'go' 'version'"
   Exced = true
 
 [hello]
-  Val = " 'echo' 'Hello World! '"
+  Val = "'hello' 'echo' -n 'Hello' 'World!'"
   Exced = true
 
 [passwd]
-  Val = " '12345678'"
+  Val = "'12345678'"
   Exced = false
 ```
 
@@ -40,7 +41,7 @@ Hello World!
 
 ➜  o git:(master) ✗ o
 *********** keys **********
-gv
+passwd
 hello
-go
+gov
 ```

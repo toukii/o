@@ -14,10 +14,10 @@ import (
 
 func init() {
 	dic = make(map[string]*Note)
-	bs := goutils.ReadFile(notesFile)
+	bs := goutils.ReadFile(notesFile, false)
 	if len(bs) <= 0 {
 		notesFile = os.Getenv("HOME") + "/.notes.toml"
-		bs = goutils.ReadFile(notesFile)
+		bs = goutils.ReadFile(notesFile, false)
 	}
 	err := toml.Unmarshal(bs, &dic)
 	if err != nil {

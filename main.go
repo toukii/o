@@ -40,6 +40,7 @@ var (
 	dic map[string]*Note
 
 	notesFile = ".notes.toml"
+	noteFile  = os.Getenv("HOME") + "/.note"
 )
 
 func refresh() {
@@ -131,18 +132,22 @@ func GetNote(key string) {
 		return
 	}
 	if !note.Exced {
-		fmt.Printf("%s\n", note.Val)
+		switch runtime.GOOS {
+		case "darwin":
+			// 			exc.Bash(fmt.Sprintf(`cat>%s<<-EOF
+			// %s`, noteFile, note.Val)).Debug(false).Execute()
+			err := goutils.WriteFile(noteFile, []byte(note.Val))
+			if err != nil {
+				log.Fatal(err)
+			}
+			exc.Bash(fmt.Sprintf(`cat %s | pbcopy`, noteFile)).Debug(false).Execute()
+			fmt.Println("command is in the clipbroad.")
+		default:
+			fmt.Printf("%s\n", note.Val)
+		}
+
 		return
 	}
 
-	switch runtime.GOOS {
-	case "darwin":
-		exc.Bash(fmt.Sprintf(`cat <<EOF >%s
-%s`, "~/.note.sh", note.Val)).Debug(false).Execute()
-		exc.Bash(fmt.Sprintf(`cat ~/.note.sh | pbcopy`)).Debug(false).Execute()
-		// "echo -n `pbpaste`"
-		fmt.Println("command is in the clipbroad.")
-	default:
-		exc.Bash(note.Val).Debug(true).Execute()
-	}
+	exc.Bash(note.Val).Debug(true).Execute()
 }

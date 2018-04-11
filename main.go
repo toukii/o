@@ -109,9 +109,9 @@ func SetNote(args []string) {
 }
 
 func ListKeys() {
-	fmt.Println("*********** keys **********")
-	for k, _ := range dic {
-		fmt.Println(k)
+	fmt.Println("**** keys ***** exced *******")
+	for k, n := range dic {
+		fmt.Printf("%-15s %t\n", k, n.Exced)
 	}
 }
 

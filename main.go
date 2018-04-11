@@ -50,14 +50,9 @@ func main() {
 	args := os.Args
 	size := len(args)
 	switch size {
-	case 0:
 	case 1:
-		fmt.Println("nil args")
+		ListKeys()
 	case 2:
-		if args[1] == "-l" {
-			ListKeys()
-			return
-		}
 		GetNote(args[1])
 	default:
 		SetNote(args[1:])
@@ -65,9 +60,15 @@ func main() {
 }
 
 func SetNote(args []string) {
+	size := len(args)
 	exced := false
 	if args[1] == "-e" {
 		exced = true
+	}
+	if size == 2 && exced || size == 1 {
+		delete(dic, args[0])
+		refresh()
+		return
 	}
 	var vals []string
 	w := bytes.NewWriter(make([]byte, 0, 1024))
@@ -82,7 +83,7 @@ func SetNote(args []string) {
 			space = " "
 		}
 		if it[0] != "-"[0] {
-			w.Write(goutils.ToByte(fmt.Sprintf("%s'%s'", space, it)))
+			w.Write(goutils.ToByte(fmt.Sprintf(`%s'%s'`, space, it)))
 		} else {
 			w.Write(goutils.ToByte(fmt.Sprintf("%s%s", space, it)))
 		}
@@ -109,10 +110,10 @@ func GetNote(key string) {
 		keys = append(keys, k)
 	}
 	cm := closestmatch.New(keys, []int{1})
-	k2 := cm.Closest(key)
-	fmt.Printf("%s ≈≈> %s\n", key, k2)
 	note, ex := dic[key]
 	if !ex {
+		k2 := cm.Closest(key)
+		fmt.Printf("%s ≈≈> %s\n", key, k2)
 		note, ex = dic[k2]
 	}
 	if !ex {

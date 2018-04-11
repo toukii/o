@@ -40,8 +40,8 @@ hel ≈≈> hello
 Hello World!
 
 ➜  o git:(master) ✗ o
-*********** keys **********
-passwd
-hello
-gov
+**** keys ***** exced *******
+gov             true
+hello           false
+passwd          false
 ```

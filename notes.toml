@@ -6,14 +6,6 @@
   Val = "'go' 'version'"
   Exced = true
 
-[gv]
-  Val = "'go' 'version'"
-  Exced = true
-
 [hello]
   Val = "'echo' -n 'Hello World! '"
   Exced = true
-
-[passwd]
-  Val = "'12345678'"
-  Exced = false

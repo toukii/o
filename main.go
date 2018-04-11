@@ -66,6 +66,9 @@ func SetNote(args []string) {
 		exced = true
 	}
 	if size == 2 && exced || size == 1 {
+		if _, ex := dic[args[0]]; !ex {
+			return
+		}
 		delete(dic, args[0])
 		refresh()
 		return

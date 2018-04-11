@@ -3,7 +3,7 @@
   Exced = true
 
 [hello]
-  Val = "'hello' 'echo' -n 'Hello' 'World!'"
+  Val = "'echo' -n 'Hello' 'World!'"
   Exced = true
 
 [passwd]

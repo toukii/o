@@ -6,7 +6,7 @@
 __-e ：是否可执行__
 
 ```bash
-o hello -e hello echo -n Hello World! 
+o hello -e echo -n Hello World! 
 o gov -e go version
 o passwd 12345678
 ```
@@ -19,7 +19,7 @@ o passwd 12345678
   Exced = true
 
 [hello]
-  Val = "'hello' 'echo' -n 'Hello' 'World!'"
+  Val = "'echo' -n 'Hello' 'World!'"
   Exced = true
 
 [passwd]

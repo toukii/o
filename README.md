@@ -42,6 +42,6 @@ Hello World!
 ➜  o git:(master) ✗ o
 **** keys ***** exced *******
 gov             true
-hello           false
+hello           true
 passwd          false
 ```

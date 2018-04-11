@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"runtime"
 
 	"github.com/BurntSushi/toml"
 	"github.com/everfore/exc"
@@ -23,6 +24,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 type Note struct {
@@ -132,12 +134,15 @@ func GetNote(key string) {
 		fmt.Printf("%s\n", note.Val)
 		return
 	}
-	exc.Bash(note.Val).Debug(true).Execute()
 
-	// exc.Bash(fmt.Sprintf("echo '%s'| pbcopy", note.Val)).Debug(false).Execute()
-	// bs, err := exc.Bash("echo `pbpaste`").Debug(false).DoNoTime()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Printf("%s", bs)
+	switch runtime.GOOS {
+	case "darwin":
+		exc.Bash(fmt.Sprintf(`cat <<EOF >%s
+%s`, "~/.note.sh", note.Val)).Debug(false).Execute()
+		exc.Bash(fmt.Sprintf(`cat ~/.note.sh | pbcopy`)).Debug(false).Execute()
+		// "echo -n `pbpaste`"
+		fmt.Println("command is in the clipbroad.")
+	default:
+		exc.Bash(note.Val).Debug(true).Execute()
+	}
 }

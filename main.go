@@ -94,7 +94,11 @@ func SetNote(args []string) {
 			space = " "
 		}
 		if it[0] != "-"[0] {
-			w.Write(goutils.ToByte(fmt.Sprintf(`%s'%s'`, space, it)))
+			if i == 0 || it[0] == "|"[0] || it[0] == "&"[0] || vals[i-1][0] != "-"[0] {
+				w.Write(goutils.ToByte(fmt.Sprintf("%s%s", space, it)))
+			} else {
+				w.Write(goutils.ToByte(fmt.Sprintf(`%s'%s'`, space, it)))
+			}
 		} else {
 			w.Write(goutils.ToByte(fmt.Sprintf("%s%s", space, it)))
 		}
